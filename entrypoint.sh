@@ -41,7 +41,7 @@ then
     else
       zip -r deploy.zip $INPUT_PATH -x $INPUT_EXCLUSIONS || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
       # grab the deploy.zip file and compress again into release.zip file containing deploy.zip, install.sh, README*
-      zip -r $INPUT_FILENAME $INPUT_PATH --include deploy.zip || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
+      zip -r $INPUT_FILENAME $INPUT_PATH --include 'deploy.zip README*' || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
     fi
   fi
 elif [ "$INPUT_TYPE" = "tar" ] 
