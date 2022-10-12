@@ -42,9 +42,13 @@ then
       zip -r $INPUT_FILENAME $INPUT_PATH || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
     else
       zip -r $INPUT_FILENAME_DEPLOY $INPUT_PATH -x $INPUT_EXCLUSIONS || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
+      # make RELEASE.yml context file
+      echo "GIT_RELEASE:" >> RELEASE.yml
+
       # grab the deploy.zip file and compress again into release.zip file containing deploy.zip, install.sh, README*
       zip -r $INPUT_FILENAME $INPUT_PATH --include $INPUT_INCLUSIONS || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
-      # make RELEASE.yml context file
+
+
     fi
   fi
 elif [ "$INPUT_TYPE" = "tar" ] 

@@ -39,6 +39,11 @@ inputs:
     description: 'Tool to use for archiving'
     default: 'zip'
     required: false
+  # add this to env
+  github_context:
+    description: 'metadata'
+    default: ''
+    required: false  
 runs:
   using: composite
   steps:
@@ -52,5 +57,6 @@ runs:
         INPUT_INCLUSIONS: ${{ inputs.inclusions }} # new
         INPUT_RECURSIVE_EXCLUSIONS: ${{ inputs.recursive_exclusions }}
         INPUT_TYPE: ${{ inputs.type }}
+        INPUT_GITHUB_CONTEXT: ${{ inputs.github_context }} # new
       run: $GITHUB_ACTION_PATH/entrypoint.sh
 
