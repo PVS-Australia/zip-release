@@ -44,6 +44,7 @@ then
       zip -r $INPUT_FILENAME_DEPLOY $INPUT_PATH -x $INPUT_EXCLUSIONS || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
       # make RELEASE.yml context file
       echo "GIT_RELEASE:" >> RELEASE.yml
+      echo $(jq -M -r '.ref_name' INPUT_GITHUB_CONTEXT.json) >> RELEASE.yml
       echo "  ref_name: $(jq -M -r '.ref_name' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
       echo "  published_at: $(jq -M -r '.event.release.published_at' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
       echo "  target_commitish: $(jq -M -r '.event.release.target_commitish' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
