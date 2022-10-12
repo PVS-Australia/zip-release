@@ -43,7 +43,7 @@ inputs:
   github_context:
     description: 'metadata'
     default: ''
-    required: false  
+    required: true  
 runs:
   using: composite
   steps:
