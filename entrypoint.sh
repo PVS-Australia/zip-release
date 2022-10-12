@@ -3,7 +3,7 @@
 set -eu
 
 # install required tools to work with json files
-sudo apt  install jq -y
+#sudo apt  install jq -y
 
 printf "\n📦 Creating %s archive...\n" "$INPUT_TYPE"
 
