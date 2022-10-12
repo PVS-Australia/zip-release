@@ -46,6 +46,7 @@ then
       echo $INPUT_GITHUB_CONTEXT >> INPUT_GITHUB_CONTEXT.json
       echo "GIT_RELEASE:" >> RELEASE.yml
       echo "  ref_name: $(jq -M -r '.ref_name' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
+      echo "  prerelease: $(jq -M -r '.event.release.prerelease' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
       echo "  published_at: $(jq -M -r '.event.release.published_at' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
       echo "  target_commitish: $(jq -M -r '.event.release.target_commitish' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
       echo "  triggering_actor: $(jq -M -r '.triggering_actor' INPUT_GITHUB_CONTEXT.json)" >> RELEASE.yml
