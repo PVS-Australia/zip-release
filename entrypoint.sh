@@ -1,7 +1,9 @@
 #! /bin/bash
-
 # Create archive or exit if command fails
 set -eu
+
+# install required tools to work with json files
+sudo apt  install jq -y
 
 printf "\n📦 Creating %s archive...\n" "$INPUT_TYPE"
 
@@ -41,8 +43,8 @@ then
     else
       zip -r $INPUT_FILENAME_DEPLOY $INPUT_PATH -x $INPUT_EXCLUSIONS || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
       # grab the deploy.zip file and compress again into release.zip file containing deploy.zip, install.sh, README*
-      # zip -r $INPUT_FILENAME $INPUT_PATH --include deploy.zip README* install.sh || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
       zip -r $INPUT_FILENAME $INPUT_PATH --include $INPUT_INCLUSIONS || { printf "\n⛔ Unable to create %s archive.\n" "$INPUT_TYPE"; exit 1;  }
+      # make RELEASE.yml context file
     fi
   fi
 elif [ "$INPUT_TYPE" = "tar" ] 
